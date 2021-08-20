@@ -989,7 +989,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a4fb78f6c82264d9b6ff73f73b279e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 8621294900752936271, guid: f3192ba390edbac4f98c4cce06125e87, type: 3}
+  obstaclePrefabs:
+  - {fileID: 6292980762198393312, guid: faf55d76da63f834cac23976324a1211, type: 3}
+  - {fileID: 9018705877512923797, guid: 7483b24018d01354b9973bb0e9775eba, type: 3}
+  - {fileID: 7626713406153425488, guid: b61ce1c770c86e146b444571a92c280a, type: 3}
+  - {fileID: 2534489993735687656, guid: cc0ba6ca45cd9a043994ad3af69ef51f, type: 3}
+  - {fileID: 7498593952270359823, guid: bf9e6ffef9701374ea6aba484f316e95, type: 3}
+  - {fileID: 6345123486690173297, guid: a2df7a2d214377c48ac3f75e07c94825, type: 3}
+  - {fileID: 649711307196026033, guid: 9022ffe7704756743a4f8050812eb048, type: 3}
   spawnPos: {x: 30, y: 0, z: 0}
   startDelay: 2
   repeatRate: 1.7
