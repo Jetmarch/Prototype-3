@@ -240,6 +240,8 @@ MonoBehaviour:
   dirtParticle: {fileID: 821778567}
   jumpSound: {fileID: 8300000, guid: 0f7d0b7c3397f4dac91f20e8a77d2d57, type: 3}
   crashSound: {fileID: 8300000, guid: 913d6445ee8cc4152a9c18da590ee203, type: 3}
+  isGrounded: 1
+  isReady: 0
 --- !u!65 &212196458
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -391,7 +393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2f8d00bf5057f624e949aef802595da9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5
+      value: -4.49
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2f8d00bf5057f624e949aef802595da9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -713,6 +715,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731077453e9948b40ad4b04cc73613ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
+  dashScoreModifier: 3
+  dashSpeedModifier: 2
 --- !u!114 &835818923
 MonoBehaviour:
   m_ObjectHideFlags: 0

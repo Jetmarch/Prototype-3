@@ -11,8 +11,10 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dirtParticle;
     public AudioClip jumpSound;
     public AudioClip crashSound;
+    public bool isGrounded = true;
+    public bool isReady = false;
 
-    private bool isGrounded = true;
+    private bool isDobleJumpActive = true;
     private Rigidbody playerRb;
     private Animator playerAnim;
     private AudioSource playerAudio;
@@ -23,6 +25,10 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         Physics.gravity *= gravityModifier;
+
+
+        playerAnim.SetFloat("Speed_f", 0.3f);
+        dirtParticle.Stop();
     }
 
     // Update is called once per frame
@@ -33,20 +39,67 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        //Intro animation
+        if(!isReady)
+        {
+            IntroAnimation();
+        }
+
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
-            playerAnim.SetTrigger("Jump_trig");
-            dirtParticle.Stop();
-            playerAudio.PlayOneShot(jumpSound, 1.0f);
+            Jump();
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && isDobleJumpActive)
+        {
+            DoubleJump();
         }
     }
+
+    private void IntroAnimation()
+    {
+        transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+        if (transform.position.x >= 3.0f)
+        {
+            isReady = true;
+            playerAnim.SetFloat("Speed_f", 1.0f);
+            dirtParticle.Play();
+        }
+    }
+
+    private void Jump()
+    {
+        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isGrounded = false;
+        playerAnim.SetTrigger("Jump_trig");
+        dirtParticle.Stop();
+        playerAudio.PlayOneShot(jumpSound, 1.0f);
+    }
+
+    private void DoubleJump()
+    {
+        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isDobleJumpActive = false;
+        playerAnim.SetTrigger("Jump_trig");
+        dirtParticle.Stop();
+        playerAudio.PlayOneShot(jumpSound, 1.0f);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        if(isGameOver)
+        {
+            return;
+        }
+
+        if(!isReady)
+        {
+            return;
+        }
+
         if(collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            isDobleJumpActive = true;
             dirtParticle.Play();
         }
         else if(collision.gameObject.CompareTag("Obstacle"))
